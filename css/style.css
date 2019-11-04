@@ -25,7 +25,7 @@
     line-height: 40px;
     text-align: center;
     color: #fff;
-    background: cornflowerblue;
+    background: #808080;
     border-radius: 5px;
     cursor: pointer;
     user-select: none;
@@ -33,7 +33,7 @@
 }
 
 .keyboard .key:hover {
-    background: darkcyan;
+    background:#E0FFFF;
 }
 
 .keyboard .tab,
@@ -53,8 +53,8 @@
 .keyboard .tab,
 .keyboard .win {
     font-weight: 600;
-    color: rgb(255, 240, 30);
-    background-color: blueviolet;
+    color: rgb(255, 255, 255);
+    background-color: #30D5C8;
 }
 
 .keyboard .caps,
