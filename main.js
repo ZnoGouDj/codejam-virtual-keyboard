@@ -161,10 +161,61 @@ document.addEventListener('keydown', evt => {
     if (buttonEl) {
         buttonEl.classList.add('active');
     }
-    if (buttonEl.innerText.length <= 1) {
+    if (buttonEl.innerText.length <= 1 && 
+        buttonEl.innerText !== '⯆' &&
+        buttonEl.innerText !== "⯇" &&
+        buttonEl.innerText !== "⯈" &&
+        buttonEl.innerText !== "⯅") {
         add(buttonEl.innerText);
     }
+    if (buttonEl.innerText === 'enter') {
+        add('\n');
+    }
+    if (buttonEl.innerText === 'space') {
+        event.preventDefault();
+        add(' ');
+    }
+    if (buttonEl.innerText === 'tab') {
+        event.preventDefault();
+        add('        ');
+    }
+    if (buttonEl.innerText === "backspace") {
+        removeText();
+    }
+    if (buttonEl.innerText === "caps") {
+        counter++;
+    }
+    if (buttonEl.innerText === "shift") {
+        document.getElementsByClassName("keys-row").remove();
+        const keyboardDiv = document.getElementById('keyboard');
+        if (language === 'englishKb') {
+            renderKeyboard(keyboardDiv, russianKb);
+            language = 'russianKb';
+        } else {
+            renderKeyboard(keyboardDiv, englishKb);
+            language = 'englishKb';
+        } 
+    }
 })
+
+let language = 'englishKb';
+let counter = 0;
+
+document.addEventListener('keypress', evt => {
+    const buttonEl = document.getElementById(evt.keyCode);
+    if (buttonEl === "shift") {
+        document.addEventListener('keydown', evt => {
+            const buttonEl = document.getElementById(evt.keyCode);
+            if (buttonEl) {
+                buttonEl.classList.add('active');
+            }
+            if (buttonEl.innerText.length <= 1) {
+                alert('hi');
+            }
+    })
+}
+})
+
 
 Element.prototype.remove = function () {
     this.parentElement.removeChild(this);
@@ -214,9 +265,18 @@ function renderTextArea() {
     div.appendChild(input);
 }
 
-function add(text){
+function add(text) {
     var TheTextBox = document.getElementById('textarea');
-    TheTextBox.value = TheTextBox.value + text;
+    if (counter % 2 === 0) {
+        TheTextBox.value = TheTextBox.value + text;
+    } else {
+        TheTextBox.value = TheTextBox.value + text.toUpperCase();
+    }
+}
+
+function removeText(){
+    var TheTextBox = document.getElementById('textarea');
+    TheTextBox.value = TheTextBox.value.slice(0, -1); 
 }
 
 document.addEventListener('DOMContentLoaded', () => {
